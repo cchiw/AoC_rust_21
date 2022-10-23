@@ -1,0 +1,10 @@
+[package]
+name = "xyz"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+regex = "0.1.41"
+regex-syntax = "0.6.27"
+itertools = "0.8"
+dict = "0.1.5"
