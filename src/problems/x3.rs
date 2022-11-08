@@ -1,4 +1,4 @@
-use crate::shared::readings::read_u32s;
+use crate::shared::readings::read_grid;
 use crate::shared::tree::BST;
 use fs::File;
 use std::collections::HashMap;
@@ -8,13 +8,14 @@ use std::io::BufReader;
 
 //const INPUT:&str= "src/data/tmp.txt";
 const INPUT: &str = "src/data/input_x3.txt";
+//The Decimal equivalent is most779, least 3316 power consump 2583164
 
 pub fn p1() {
-    let mut m: Vec<Vec<u32>> = Vec::new();
-    read_u32s(&mut m, INPUT);
+    let mut m: Vec<Vec<i32>> = Vec::new();
+    read_grid(INPUT, &mut m);
     let mut hm = HashMap::new();
     for vec in m {
-        let mut index: u32 = 0;
+        let mut index: i32 = 0;
         for element in vec {
             let key = (index, element);
             let value = match hm.get(&key) {
@@ -26,12 +27,12 @@ pub fn p1() {
         }
     }
     let mut index = 0;
-    let mut most: Vec<u32> = Vec::new();
-    while index < u32::MAX {
+    let mut most: Vec<i32> = Vec::new();
+    while index < i32::MAX {
         let key_0 = (index, 0);
         let key_1 = (index, 1);
         match (hm.get(&key_0), hm.get(&key_1)) {
-            (None, None) => index = u32::MAX,
+            (None, None) => index = i32::MAX,
             (Some(_), None) => {
                 most.push(0);
                 index += 1;
@@ -53,12 +54,12 @@ pub fn p1() {
     } //end index while loop
 
     let mut index = 0;
-    let mut least: Vec<u32> = Vec::new();
-    while index < u32::MAX {
+    let mut least: Vec<i32> = Vec::new();
+    while index < i32::MAX {
         let key_0 = (index, 0);
         let key_1 = (index, 1);
         match (hm.get(&key_0), hm.get(&key_1)) {
-            (None, None) => index = u32::MAX,
+            (None, None) => index = i32::MAX,
             (Some(_), None) => {
                 least.push(0);
                 index += 1;
@@ -83,13 +84,13 @@ pub fn p1() {
         .map(|v| v.to_string())
         .collect::<Vec<String>>()
         .join("");
-    let gamma = u32::from_str_radix(&t2, 2).unwrap();
+    let gamma = i32::from_str_radix(&t2, 2).unwrap();
     let t3 = least
         .iter()
         .map(|v| v.to_string())
         .collect::<Vec<String>>()
         .join("");
-    let epsilon = u32::from_str_radix(&t3, 2).unwrap();
+    let epsilon = i32::from_str_radix(&t3, 2).unwrap();
     let power_consumption = gamma * epsilon;
     println!(
         "The Decimal equivalent is most{:?}, least {:?} power consump {:?}",

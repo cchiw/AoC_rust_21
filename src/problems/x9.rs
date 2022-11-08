@@ -2,7 +2,6 @@ use crate::shared::readings::read_grid;
 use std::collections::HashSet;
 use std::collections::HashMap;
 
-//const INPUT: &str = "src/data/tmp.txt";
 const INPUT: &str = "src/data/input_x9.txt";
 type Ty = usize;
 type Tyv = i32;

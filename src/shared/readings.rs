@@ -1,10 +1,11 @@
 use crate::shared::point::Point;
 use fs::File;
 use regex::Regex;
-use std::collections::HashMap;
 use std::fs;
 use std::io::BufRead;
 use std::io::BufReader;
+use std::collections::HashSet;
+use std::collections::HashMap;
 type Tyv = i32;
 
 pub fn read_i64(v: &mut Vec<i64>, input: &str) {
@@ -13,22 +14,18 @@ pub fn read_i64(v: &mut Vec<i64>, input: &str) {
     *v = reader.lines().map(|x| x.unwrap().parse::<i64>().unwrap()).collect::<Vec<i64>>();
 }
 
-pub fn read_u32s(m: &mut Vec<Vec<u32>>, input: &str) {
+pub fn read_grid(input:&str, grid: &mut Vec<Vec<Tyv>>){
     let file = File::open(input).expect("file not found");
     let reader = BufReader::new(file);
-    const RADIX: u32 = 10;
     for line in reader.lines() {
-        let t0 = line.unwrap();
-        let t1 = t0.chars();
-        let mut current: Vec<u32> = Vec::new();
-        for t2 in t1 {
-            let t3 = t2.to_digit(RADIX).unwrap();
-            current.push(t3);
+        let mut row: Vec<Tyv> = Vec::new();
+        for c in line.unwrap().chars() {
+            let t = c as Tyv - 0x30;
+            row.push(t);
         }
-        m.push(current);
+        grid.push(row);
     }
 }
-
 pub fn read_points(input: &str, coords: &mut Vec<Vec<Point>>) {
     let file = File::open(input).expect("file not found");
     let reader = BufReader::new(file);
@@ -84,15 +81,5 @@ pub fn read_dict(input: &str, seen: &mut HashMap<i64, i64>) {
     }
 }
 
-pub fn read_grid(input:&str, grid: &mut Vec<Vec<Tyv>>){
-    let file = File::open(input).expect("file not found");
-    let reader = BufReader::new(file);
-    for line in reader.lines() {
-        let mut row: Vec<Tyv> = Vec::new();
-        for c in line.unwrap().chars() {
-            let t = c as Tyv - 0x30;
-            row.push(t);
-        }
-        grid.push(row);
-    }
-}
+
+

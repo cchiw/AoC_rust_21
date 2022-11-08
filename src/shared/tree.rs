@@ -57,31 +57,25 @@ impl BST {
         match (&self.zeros, &self.ones) {
             (None, None) => {}
             (Some(z), None) => {
-                println!("\n --Only zero");
+
                 bits.push(0);
                 z.walk_max(bits);
             }
             (None, Some(o)) => {
-                println!("\n -- Only One");
+
                 bits.push(1);
                 o.walk_max(bits);
             }
             (Some(z), Some(o)) => {
-                println!(
-                    "\n -- comparing 0 bits ({:?}) 1 bits ({:?})",
-                    &z.occurances, &o.occurances
-                );
                 if z.occurances > o.occurances {
                     bits.push(0);
-                    print!("\t Decided on zero");
                     z.walk_max(bits);
                 } else if z.occurances < o.occurances {
                     bits.push(1);
-                    print!("\t Decided on one");
+
                     o.walk_max(bits);
                 } else {
                     bits.push(1);
-                    print!("\t It's a tie Decided on one");
                     o.walk_max(bits);
                 } // end else
             } //end pattern
@@ -112,7 +106,6 @@ impl BST {
     pub fn get_most_bin(&self) -> u32 {
         let mut t0: Vec<u32> = Vec::new();
         self.walk_max(&mut t0);
-        println!("\n\n Believes Max vec is {:?}", t0);
         let t1 = t0
             .iter()
             .map(|v| v.to_string())
@@ -123,7 +116,6 @@ impl BST {
     pub fn get_least_bin(&self) -> u32 {
         let mut t0: Vec<u32> = Vec::new();
         self.walk_min(&mut t0);
-        println!("Believes Min vec is {:?}", t0);
         let t1 = t0
             .iter()
             .map(|v| v.to_string())

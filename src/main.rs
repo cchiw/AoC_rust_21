@@ -10,11 +10,13 @@ use crate::problems::x7;
 use crate::problems::x8;
 use crate::problems::x9;
 use crate::problems::x10;
+use crate::problems::x11;
+use crate::problems::x12;
 pub mod problems;
 
 fn main() {
 
-    let problem = 10;
+    let problem = 12;
     if problem == 1 {
         x1::p1();
         x1::p2();
@@ -42,5 +44,11 @@ fn main() {
         x9::p2();
     } else if problem ==10{
     	x10::p1p2();
+    } else if problem == 11{
+   	x11::p1();
+   	x11::p2();
+    } else if problem ==12 {
+    	x12::p1();
+    	x12::p2();
     }
 }
