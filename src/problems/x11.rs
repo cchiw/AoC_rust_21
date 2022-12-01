@@ -21,10 +21,7 @@ pub fn printgrid(grid: &mut TypeGrid) {
 }
 //bump up by one if in bounds
 pub fn bump(grid: &mut TypeGrid, i: usize, j: usize, new_sparkles: &mut HashSet<TyCoord>) {
-
-	 
     if i >= 0 && i < grid.len() && j >= 0 && j < grid[0].len() {
-
         let item = grid[i][j];
         if item == 9 {
             //new sparkle
@@ -38,21 +35,23 @@ pub fn bump(grid: &mut TypeGrid, i: usize, j: usize, new_sparkles: &mut HashSet<
     }
 }
 pub fn spread(grid: &mut TypeGrid, i: usize, j: usize, new_sparkles: &mut HashSet<TyCoord>) {
-		if i>0{
-			if j>0{bump(grid, i - 1, j - 1, new_sparkles);}
- 	  	bump(grid, i - 1, j, new_sparkles);
-  	  bump(grid, i - 1, j + 1, new_sparkles);
-  	}
-  	if j>0{
-  	   bump(grid, i, j - 1, new_sparkles);
-  	   bump(grid, i + 1, j - 1, new_sparkles);
-  	}
+    if i > 0 {
+        if j > 0 {
+            bump(grid, i - 1, j - 1, new_sparkles);
+        }
+        bump(grid, i - 1, j, new_sparkles);
+        bump(grid, i - 1, j + 1, new_sparkles);
+    }
+    if j > 0 {
+        bump(grid, i, j - 1, new_sparkles);
+        bump(grid, i + 1, j - 1, new_sparkles);
+    }
 
     bump(grid, i, j + 1, new_sparkles);
     bump(grid, i + 1, j, new_sparkles);
     bump(grid, i + 1, j + 1, new_sparkles);
 }
-pub fn take_step(grid: &mut TypeGrid)-> Tyv {
+pub fn take_step(grid: &mut TypeGrid) -> Tyv {
     let mut sparkle = HashSet::new();
     //increment everything +1
     let mut i = 0;
@@ -95,7 +94,7 @@ pub fn take_step(grid: &mut TypeGrid)-> Tyv {
         while j < grid[0].len() {
             if grid[i][j] == FLASHING {
                 grid[i][j] = 0;
-                flashes+=1;
+                flashes += 1;
             }
             j += 1
         }
@@ -131,13 +130,15 @@ pub fn p2() {
     let mut flashes = 0;
     let num = grid.len() * grid[0].len();
     while step < step_limit {
-		    print!("\n Step {:?}", step);
+        print!("\n Step {:?}", step);
         let current_flashes = take_step(&mut grid);
         step += 1;
         print!("\n Step {:?}", step);
-        if current_flashes == num.try_into().unwrap() {print!("\nFound Moment");break;}
+        if current_flashes == num.try_into().unwrap() {
+            print!("\nFound Moment");
+            break;
+        }
         flashes += current_flashes;
-  
     }
     print!("Flashes {:?}", flashes);
 }

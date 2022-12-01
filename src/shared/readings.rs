@@ -4,17 +4,20 @@ use regex::Regex;
 use std::fs;
 use std::io::BufRead;
 use std::io::BufReader;
-use std::collections::HashSet;
+
 use std::collections::HashMap;
 type Tyv = i32;
 
 pub fn read_i64(v: &mut Vec<i64>, input: &str) {
     let file = File::open(input).expect("file not found");
     let reader = BufReader::new(file);
-    *v = reader.lines().map(|x| x.unwrap().parse::<i64>().unwrap()).collect::<Vec<i64>>();
+    *v = reader
+        .lines()
+        .map(|x| x.unwrap().parse::<i64>().unwrap())
+        .collect::<Vec<i64>>();
 }
 
-pub fn read_grid(input:&str, grid: &mut Vec<Vec<Tyv>>){
+pub fn read_grid(input: &str, grid: &mut Vec<Vec<Tyv>>) {
     let file = File::open(input).expect("file not found");
     let reader = BufReader::new(file);
     for line in reader.lines() {
@@ -80,6 +83,3 @@ pub fn read_dict(input: &str, seen: &mut HashMap<i64, i64>) {
         }
     }
 }
-
-
-

@@ -54,7 +54,7 @@ pub fn insert_map(
     v_4: &str,
 ) {
     let mut left = false; // c, e,  a, d, g
-    //let mut middle = false; // c, f,  a, d, g
+                          //let mut middle = false; // c, f,  a, d, g
     let mut right = false; // b, f,  a, d, g
     for x in a.chars() {
         // print!("\n\tx-{:?}", x);
@@ -136,8 +136,8 @@ pub fn redraw(line: &str) -> i32 {
         } else if n == 6 {
             v_6.push(output);
         } //else if n == 7 {
-        //    v_7 = output;
-        //}
+          //    v_7 = output;
+          //}
         index += 1;
     }
     //look for d and g

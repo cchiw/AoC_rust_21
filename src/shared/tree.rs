@@ -57,12 +57,10 @@ impl BST {
         match (&self.zeros, &self.ones) {
             (None, None) => {}
             (Some(z), None) => {
-
                 bits.push(0);
                 z.walk_max(bits);
             }
             (None, Some(o)) => {
-
                 bits.push(1);
                 o.walk_max(bits);
             }
